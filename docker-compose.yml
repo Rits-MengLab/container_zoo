@@ -1,0 +1,9 @@
+services:
+  Conver2trt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: TensorRT_CUDA_12.2
+    command: trtexec --onnx=/onnx/model.onnx  --explicitBatch --saveEngine=/onnx/model.trt --fp16
+    volumes:
+      - ./onnx/:/onnx/
