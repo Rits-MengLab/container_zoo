@@ -1,0 +1,33 @@
+{
+    "name": "CUDA11.8 & Conda Remote-Container",
+    
+    //GPUを搭載していないマシンで実行する際はコメントアウトしてください
+    "runArgs": ["--gpus all"],
+    
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+		"ghcr.io/rocker-org/devcontainer-features/miniforge:1": {
+			"version": "latest",
+			"variant": "Mambaforge"
+		}
+	},
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "charliermarsh.ruff"
+            ]
+        }
+    },
+
+    "remoteUser": "vscode",
+    "workspaceMount": "source=${localWorkspaceFolder}/,target=/home/vscode/workspaces,type=bind,consistency=cached",
+    "workspaceFolder": "/home/vscode/workspaces",
+
+    "postCreateCommand": "pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118"
+}
