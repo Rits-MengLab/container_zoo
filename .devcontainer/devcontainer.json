@@ -2,7 +2,10 @@
     "name": "CUDA11.8 & Conda Remote-Container",
     
     //GPUを搭載していないマシンで実行する際はコメントアウトしてください
-    "runArgs": ["--gpus all"],
+    "runArgs": [
+        "--gpus",
+        "all"
+    ],
     
     "build": {
         "dockerfile": "Dockerfile"
